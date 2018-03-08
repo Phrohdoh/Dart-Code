@@ -283,7 +283,7 @@ export function activate(context: vs.ExtensionContext) {
 			context.subscriptions.push(vs.languages.registerWorkspaceSymbolProvider(new LegacyDartWorkspaceSymbolProvider(analyzer)));
 		}
 
-		if (analyzer.capabilities.supportsFlutterOutline)
+		if (config.previewFlutterOutline && analyzer.capabilities.supportsFlutterOutline)
 			context.subscriptions.push(vs.window.registerTreeDataProvider("dartFlutterOutline", new FlutterOutlineProvider(analyzer)));
 
 		// Hook open/active file changes so we can set priority files with the analyzer.
@@ -476,6 +476,7 @@ function getAnalyzerSettings() {
 		+ config.flutterDaemonLogFile
 		+ config.closingLabels
 		+ config.previewAnalyzeAngularTemplates
+		+ config.previewFlutterOutline
 		+ config.previewDart2;
 }
 
